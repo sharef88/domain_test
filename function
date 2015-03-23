@@ -1,0 +1,6 @@
+for i in $(cat list)
+do
+	a_record=`dig +short $i`
+	ns_record=`dig +short NS $i`
+	echo -e $i'\t\t\t'$a_record'\t\t'$ns_record
+done
