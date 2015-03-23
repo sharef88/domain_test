@@ -1,4 +1,4 @@
-sublist=("www")
+sublist=("www" "awverify")
 function grab {
 	a_record=`dig +short a $1`
 	ns_record=`dig +short NS $1`
@@ -9,7 +9,7 @@ function grab {
 for i in $(cat list)
 do
 	grab $i
-	for s in $sublist
+	for s in ${sublist[@]}
 	do
 		d=$s.$i
 		grab $d
