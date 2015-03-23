@@ -1,6 +1,17 @@
+sublist=("www")
+function grab {
+	a_record=`dig +short a $1`
+	ns_record=`dig +short NS $1`
+	echo -e $1'\t\t\t'$a_record'\t\t'$ns_record
+}
+
+
 for i in $(cat list)
 do
-	a_record=`dig +short $i`
-	ns_record=`dig +short NS $i`
-	echo -e $i'\t\t\t'$a_record'\t\t'$ns_record
+	grab $i
+	for s in $sublist
+	do
+		d=$s.$i
+		grab $d
+	done
 done
